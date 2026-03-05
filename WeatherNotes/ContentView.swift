@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  WeatherNotes
-//
-//  Created by Rodion Rubets on 05.03.2026.
-//
-
 import SwiftUI
 
 struct ContentView: View {
