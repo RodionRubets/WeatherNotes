@@ -16,8 +16,16 @@ class NotesViewModel: ObservableObject {
     }
     
     func addNote(text: String) {
+        let newNoteId = UUID()
         
-        guard !text.isEmpty else { return }
+        let placeholderNote = Note(
+            id: newNoteId,
+            text: text,
+            date: Date()
+        )
+        
+        self.notes.insert(placeholderNote, at: 0)
+        self.storage.saveNotes(notes: self.notes)
         
         locationManager.onLocationUpdate = { [weak self] location in
             self?.weatherService.fetchWeather(
@@ -25,28 +33,19 @@ class NotesViewModel: ObservableObject {
                 longitude: location.coordinate.longitude
             ) { result in
                 DispatchQueue.main.async {
-                    switch result {
-                    case .success(let weather):
-                        let note = Note(id: UUID(),
-                                        text: text,
-                                        date: Date(),
-                                        temperature: weather.main.temp,
-                                        description: weather.weather.first?.description ?? "",
-                                        iconName: weather.weather.first?.icon ?? "",
-                                        locationName: weather.name
-                        )
-                        
-                        self?.notes.append(note)
-                        self?.storage.saveNotes(notes: self?.notes ?? [])
-                        
-                    case .failure(let error):
-                        self?.errorMasage = error.localizedDescription
+                    if case .success(let weather) = result {
+                        if let index = self?.notes.firstIndex(where: { $0.id == newNoteId }) {
+                            self?.notes[index].temperature = weather.main.temp
+                            self?.notes[index].description = weather.weather.first?.description
+                            self?.notes[index].iconName = weather.weather.first?.icon
+                            self?.notes[index].locationName = weather.name
+                            
+                            self?.storage.saveNotes(notes: self?.notes ?? [])
+                        }
                     }
                 }
             }
-               
         }
-        
         locationManager.requestLocation()
     }
     
