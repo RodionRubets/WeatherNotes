@@ -9,8 +9,10 @@ struct Note: Identifiable, Codable {
     var description: String?
     var iconName: String?
     var locationName: String?
+    var didFailToLoadWeather: Bool = false
     
     var systemIconName: String {
+        if didFailToLoadWeather { return "wifi.exclamationmark" }
             switch iconName {
             case "01d": return "sun.max.fill"
             case "01n": return "moon.stars.fill"
