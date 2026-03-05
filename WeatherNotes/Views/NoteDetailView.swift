@@ -34,6 +34,23 @@ struct NoteDetailView: View {
                             }
                             .font(.subheadline)
                             .foregroundColor(.secondary)
+                            
+                        } else if note.didFailToLoadWeather {
+                            VStack(spacing: 15) {
+                                Image(systemName: "wifi.slash")
+                                    .font(.system(size: 70))
+                                    .foregroundColor(.gray.opacity(0.6))
+                                
+                                Text("Погода недоступна")
+                                    .font(.headline)
+                                    .foregroundColor(.secondary)
+                                
+                                Text("Перевірте з'єднання")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+                            .frame(height: 200)
+                            
                         } else {
                             ProgressView()
                                 .scaleEffect(1.5)
@@ -70,5 +87,7 @@ struct NoteDetailView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .animation(.easeInOut, value: note.didFailToLoadWeather)
+        .animation(.spring(), value: note.temperature)
     }
 }
