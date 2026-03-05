@@ -4,6 +4,7 @@ struct WeatherResponse: Codable {
 
     let main: Main
     let weather: [Weather]
+    let name: String
 
     struct Main: Codable {
         let temp: Double
@@ -12,6 +13,5 @@ struct WeatherResponse: Codable {
     struct Weather: Codable {
         let description: String
         let icon: String
-        let name: String
     }
 }
