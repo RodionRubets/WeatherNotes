@@ -32,10 +32,17 @@ struct NotesListView: View {
             .sheet(isPresented: $showAdd) {
                 AddNoteView(viewModel: viewModel)
             }
+            .alert("Error",
+                   isPresented: Binding(
+                    get: { viewModel.errorMasage != nil},
+                    set: { _ in viewModel.errorMasage = nil})
+                   
+            ) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(viewModel.errorMasage ?? "")
+            }
+            
         }
     }
-}
-
-#Preview {
-    NotesListView()
 }
