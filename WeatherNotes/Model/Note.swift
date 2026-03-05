@@ -7,6 +7,21 @@ struct Note: Identifiable, Codable {
     let date: Date
     let temperature: Double
     let description: String
-    let icon: String
+    let iconName: String
     let locationName: String
+    
+    var systemIconName: String {
+            switch iconName {
+            case "01d": return "sun.max.fill"
+            case "01n": return "moon.stars.fill"
+            case "02d", "02n": return "cloud.sun.fill"
+            case "03d", "03n", "04d", "04n": return "cloud.fill"
+            case "09d", "09n": return "cloud.heavyrain.fill"
+            case "10d", "10n": return "cloud.sun.rain.fill"
+            case "11d", "11n": return "cloud.bolt.fill"
+            case "13d", "13n": return "snow"
+            case "50d", "50n": return "cloud.fog.fill"
+            default: return "cloud.sun.fill"
+            }
+        }
 }
