@@ -17,9 +17,12 @@ struct NoteDetailView: View {
                 .font(.title)
                 
                 VStack(alignment: .leading) {
-                    Text("\(Int(note.temperature))°C").font(.system(size: 40, weight: .bold))
-                    Text(note.description.capitalized).font(.title3).foregroundColor(.secondary)
-                    Text(note.locationName).font(.callout)
+                    if let temp = note.temperature {
+                        Text("\(Int(temp))°C").font(.system(size: 40, weight: .bold))
+                        Text(note.description?.capitalized ?? "").font(.title3).foregroundColor(.secondary)
+                    } else {
+                        ProgressView("Отримуємо погоду...")
+                    }
                 }
             }
             Spacer()
