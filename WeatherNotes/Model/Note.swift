@@ -5,10 +5,10 @@ struct Note: Identifiable, Codable {
     let id: UUID
     let text: String
     let date: Date
-    let temperature: Double
-    let description: String
-    let iconName: String
-    let locationName: String
+    var temperature: Double?
+    var description: String?
+    var iconName: String?
+    var locationName: String?
     
     var systemIconName: String {
             switch iconName {
