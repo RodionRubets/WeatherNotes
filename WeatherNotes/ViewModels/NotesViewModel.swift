@@ -29,8 +29,8 @@ class NotesViewModel: ObservableObject {
                                         date: Date(),
                                         temperature: weather.main.temp,
                                         description: weather.weather.first?.description ?? "",
-                                        icon: weather.weather.first?.icon ?? "",
-                                        locationName: weather.weather.first?.name ?? ""
+                                        iconName: weather.weather.first?.icon ?? "",
+                                        locationName: weather.name
                         )
                         
                         self?.notes.append(note)
