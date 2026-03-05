@@ -8,5 +8,5 @@ struct Note: Identifiable, Codable {
     let temperature: Double
     let description: String
     let icon: String
-    let location: String
+    let locationName: String
 }
