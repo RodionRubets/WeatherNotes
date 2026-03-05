@@ -15,6 +15,8 @@ struct NotesListView: View {
                             .font(.headline)
                         Text(note.date.formatted())
                     }
+                        Image(systemName: note.systemIconName)
+                    
                 }
                 .contextMenu {
                     Button(role: .destructive) {
