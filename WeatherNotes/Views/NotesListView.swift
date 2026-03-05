@@ -14,9 +14,16 @@ struct NotesListView: View {
                         Text(note.text)
                             .font(.headline)
                         Text(note.date.formatted())
-                        Text("\(note.temperature, specifier: "%.1f")°C")
                     }
                 }
+                .contextMenu {
+                    Button(role: .destructive) {
+                            viewModel.deleteSingleNote(note)
+                        } label: {
+                            Label("Видалити", systemImage: "trash")
+                        }
+                }
+                
             }
             .navigationTitle(Text("Weather Notes"))
             
@@ -44,5 +51,7 @@ struct NotesListView: View {
             }
             
         }
+        .padding(.top, 20)
+        
     }
 }
