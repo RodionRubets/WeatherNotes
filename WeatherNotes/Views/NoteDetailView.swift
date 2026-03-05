@@ -12,15 +12,14 @@ struct NoteDetailView: View {
             Divider()
             
             HStack(spacing: 20) {
-                AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(note.icon)@4x.png")) { image in
-                    image.resizable()
-                } placeholder: { ProgressView() }
-                .frame(width: 100, height: 100)
+                Image(systemName: note.systemIconName)
+                .symbolRenderingMode(.palette)
+                .font(.title)
                 
                 VStack(alignment: .leading) {
                     Text("\(Int(note.temperature))°C").font(.system(size: 40, weight: .bold))
                     Text(note.description.capitalized).font(.title3).foregroundColor(.secondary)
-                    Text(note.locationName).font(.subheadline).foregroundColor(.gray)
+                    Text(note.locationName).font(.callout)
                 }
             }
             Spacer()
