@@ -23,6 +23,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 
         guard let location = locations.first else { return }
         onLocationUpdate?(location)
+        
+        onLocationUpdate = nil
     }
 
     func locationManager(_ manager: CLLocationManager,
