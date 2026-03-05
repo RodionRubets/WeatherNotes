@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 import CoreLocation
 import Combine
 
@@ -16,6 +16,9 @@ class NotesViewModel: ObservableObject {
     }
     
     func addNote(text: String) {
+        
+        guard !text.isEmpty else { return }
+        
         locationManager.onLocationUpdate = { [weak self] location in
             self?.weatherService.fetchWeather(
                 latitude: location.coordinate.latitude,
@@ -45,5 +48,12 @@ class NotesViewModel: ObservableObject {
         }
         
         locationManager.requestLocation()
+    }
+    
+    func deleteSingleNote(_ note: Note) {
+        if let index = notes.firstIndex(where: { $0.id == note.id }) {
+                notes.remove(at: index)
+            storage.saveNotes(notes: notes)
+        }
     }
 }
