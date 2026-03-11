@@ -32,19 +32,16 @@ struct NotesListView: View {
                             }
                         }
                     }
-                    .contextMenu {
-                        Button(role: .destructive) { viewModel.deleteSingleNote(note) } label: {
-                            Label("Видалити", systemImage: "trash")
-                        }
-                    }
                 }
+                .onDelete(perform: viewModel.deleteNotes)
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Weather Notes")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                         Button { showAdd = true } label: {
-                            Image(systemName: "plus")  
+                            Image(systemName: "plus")
+                                .font(Font.callout.bold())
                     }
                 }
             }
