@@ -1,17 +1,16 @@
-//
-//  WeatherNotesApp.swift
-//  WeatherNotes
-//
-//  Created by Rodion Rubets on 05.03.2026.
-//
-
 import SwiftUI
 
 @main
 struct WeatherNotesApp: App {
+    
+    var location = LocationManager()
+    
     var body: some Scene {
         WindowGroup {
             NotesListView()
+                .onAppear {
+                    self.location.requestLocation()
+                }
         }
     }
 }
