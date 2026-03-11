@@ -4,11 +4,16 @@ struct AddNoteView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: NotesViewModel
     @State private var text = ""
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
                 TextField("Що сталось?", text: $text, axis: .vertical)
+                    .focused($isFocused)
+                    .onAppear {
+                        isFocused = true
+                    }
                     .lineLimit(5...10)
                     .padding()
                     .background(Color(.secondarySystemBackground))
