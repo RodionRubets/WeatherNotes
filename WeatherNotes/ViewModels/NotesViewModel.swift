@@ -50,10 +50,7 @@ class NotesViewModel: ObservableObject {
         locationManager.requestLocation()
     }
     
-    func deleteSingleNote(_ note: Note) {
-        if let index = notes.firstIndex(where: { $0.id == note.id }) {
-                notes.remove(at: index)
-            storage.saveNotes(notes: notes)
-        }
+    func deleteNotes(at offsets: IndexSet) {
+        notes.remove(atOffsets: offsets)
     }
 }
