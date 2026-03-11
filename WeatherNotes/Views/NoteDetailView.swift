@@ -85,6 +85,7 @@ struct NoteDetailView: View {
                     .padding(.horizontal)
                 }
             }
+            .scrollIndicators(.never)
         }
         .navigationBarTitleDisplayMode(.inline)
         .animation(.easeInOut, value: note.didFailToLoadWeather)
