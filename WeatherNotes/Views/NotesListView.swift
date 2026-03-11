@@ -23,7 +23,7 @@ struct NotesListView: View {
                             
                             if let temp = note.temperature {
                                 Image(systemName: note.systemIconName)
-                                    .symbolRenderingMode(.multicolor)
+                                    .symbolRenderingMode(.palette)
                                     .font(.title3)
                                 Text("\(Int(temp))°C")
                                     .font(.subheadline).bold()
